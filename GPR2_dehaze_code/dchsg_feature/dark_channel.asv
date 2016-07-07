@@ -1,0 +1,17 @@
+function darkc=dark_channel(I,win_size)
+I0=imread('01.jpg');
+[h w dim]=size(I0);
+I=zeros(h,w);
+I(:,:)=min(I0(:,:,1),min(I0(:,:,2),I0(:,:,3)));
+[h w]=size(I);
+darkc=zeros(h,w);
+win_size=3;
+for i=1:h-win_size
+    for j=1:w-win_size
+        block=I(i:(i+win_size),j:(j+win_size)); %取以i，j为起点的一个步长区域
+		min_val = min(block(:));
+		darkc(i:(i+win_size),j:(j+win_size))=min_val;
+    end
+end 
+darkc=uint8(darkc);
+figure,imshow(darkc);

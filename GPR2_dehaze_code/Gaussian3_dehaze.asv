@@ -1,0 +1,11 @@
+function Gaussian3_dehaze()
+I0=imread('Haze0_5.jpg');
+I = im2double(I0);
+%[seg Sp Sp2]=super_pixels(I);
+Sp2=importdata()
+H_gabor=feature_vector(I0, Sp2);
+pre_y1=first_regression(H_gabor);
+local_stru=trans_smooth(I0,pre_y1,Sp2);
+pre_y2=second_regression(local_stru);
+haze_filtering(pre_y2,I0);
+%clear all;
